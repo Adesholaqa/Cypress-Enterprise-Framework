@@ -7,4 +7,5 @@ module.exports = defineConfig({
     baseUrl: "https://automationexercise.com",
     supportFile: "cypress/support/e2e.js"
   },
+  pageLoadTimeout: 120000
 });

@@ -5,12 +5,22 @@ describe("Login Test", () => {
     it("should open homepage and click login", () => {
         HomePage.open();
         HomePage.clickLogin();
-        LoginPage.enterEmail('Adeshola@yopmail.com');
-        LoginPage.enterPassword('Adeshola1234');
-        LoginPage.clickLoginButton();
 
-        LoginPage.verifyLoginSuccess();
-        LoginPage.verifyDeleteAccountButton();
-        cy.url().should('eq', Cypress.config('baseUrl') + '/');
+        cy.fixture('user').then((user) => {
+            cy.ixture('loginUser').then((loginUser) => {
+
+                LoginPage.enterEmail(loginUser.email);
+                LoginPage.enterPassword(user.password);
+                LoginPage.clickLoginButton();
+
+                LoginPage.verifyLoginSuccess();
+
+                LoginPage.verifyDeleteAccountButton();
+
+                cy.url().should('eq', Cypress.config('baseUrl') + '/');
+            });
+        });
+
+
     });
 });

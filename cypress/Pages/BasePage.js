@@ -15,6 +15,10 @@ class BasePage {
         return cy.get(locator);
     }
 
+    select (locator, value) {
+        cy.get(locator).select (value)
+    }
+
 }
 
 export default BasePage;
