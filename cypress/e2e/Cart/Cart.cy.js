@@ -1,11 +1,12 @@
 import HomePage from '../../Pages/HomePage';
+import CartPage from '../../Pages/CartPage';
 import LoginPage from '../../Pages/LoginPage';
 
-describe("Login Test", () => {
-    it("should open homepage and click login", () => {
+describe("cart flow ", () => {
+
+    it("Add a product to the cart", () => {
         HomePage.open();
         HomePage.clickLogin();
-
         cy.fixture('user').then((user) => {
             cy.fixture('loginUser').then((loginUser) => {
 
@@ -13,11 +14,13 @@ describe("Login Test", () => {
                 LoginPage.enterPassword(user.password);
                 LoginPage.clickLoginButton();
 
-                LoginPage.verifyLoginSuccess();
+                // let add an item to the cart
 
-                LoginPage.verifyDeleteAccountButton();
-
-                cy.url().should('eq', Cypress.config('baseUrl') + '/');
+                CartPage.clickProduct();
+               CartPage.clickAddToCart();
+               CartPage.clickContinueShoppingButton();
+               CartPage.clickViewCartButton();
+               //CartPage.clickDeleteProduct();
             });
         });
 
